@@ -12,6 +12,25 @@ class Piece {
     this.image = loadImage(`assets/${color}${type}.png`);
     this.type = type;
     this.movingThisPiece = false;
+    this.value = Piece.getPieceValue(this.type);
+  }
+
+  static getPieceValue(type) {
+    switch (type) {
+      case "King":
+        return Infinity;
+      case "Queen":
+        return 9;
+      case "Rook":
+        return 5;
+      case "Bishop":
+      case "Knight":
+        return 3;
+      case "Pawn":
+        return 1;
+      default:
+        return 0;
+    }
   }
 
   show() {

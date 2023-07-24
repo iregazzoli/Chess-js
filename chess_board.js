@@ -3,6 +3,8 @@ let board;
 let moving = false;
 let tileSize = 100;
 let whitesMoves = true;
+let whiteScore = 0;
+let blackScore = 0;
 
 function setup() {
   let boardCanvas = createCanvas(800, 800);

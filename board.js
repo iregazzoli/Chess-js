@@ -47,20 +47,74 @@ class Board {
     }
   }
 
-  showTakenPieces(canvasWhite, canvasBlack) {
-    canvasWhite.background(120, 120, 120);
-    canvasBlack.background(120, 120, 120);
-
-    for (let i = 0; i < this.whiteTakenPieces.length; i++) {
-      let x = (i * tileSize) / 2 + tileSize / 4;
-      let y = tileSize / 4;
-      this.whiteTakenPieces[i].showAt(canvasWhite, x, y);
+  getLastImagePosition(takenPiecesArray) {
+    if (takenPiecesArray.length === 0) {
+      return { x: 0, y: 0 };
     }
 
-    for (let i = 0; i < this.blackTakenPieces.length; i++) {
-      let x = (i * tileSize) / 2 + tileSize / 4;
-      let y = tileSize / 4;
-      this.blackTakenPieces[i].showAt(canvasBlack, x, y);
+    let lastPieceIndex = takenPiecesArray.length - 1;
+    let x = (lastPieceIndex * tileSize) / 2 + tileSize / 4;
+    let y = tileSize / 4;
+
+    return { x, y };
+  }
+
+  showTakenPieces(canvasWhite, canvasBlack) {
+    let someOffset = tileSize / 4;
+    canvasWhite.background(120, 120, 120);
+    canvasBlack.background(120, 120, 120);
+    let lastImagePositionWhite, lastImagePositionBlack;
+
+    let whiteScoreElement = document.getElementById("whiteScore");
+    let blackScoreElement = document.getElementById("blackScore");
+
+    let whiteScoreParentHeight = document.getElementById(
+      "capturedWhitePieces"
+    ).offsetHeight;
+    let blackScoreParentHeight = document.getElementById(
+      "capturedBlackPieces"
+    ).offsetHeight;
+
+    let canvasMiddleWhite = whiteScoreParentHeight / 3;
+    let canvasMiddleBlack = blackScoreParentHeight / 3;
+
+    let whiteScore = this.whiteTakenPieces.reduce(
+      (total, piece) => total + piece.value,
+      0
+    );
+    let blackScore = this.blackTakenPieces.reduce(
+      (total, piece) => total + piece.value,
+      0
+    );
+
+    if (whiteScore > 0) {
+      for (let i = 0; i < this.whiteTakenPieces.length; i++) {
+        let x = (i * tileSize) / 2 + tileSize / 4;
+        let y = tileSize / 4;
+        this.whiteTakenPieces[i].showAt(canvasWhite, x, y);
+        lastImagePositionWhite = x;
+      }
+      whiteScoreElement.innerText = `+${whiteScore}`;
+      whiteScoreElement.style.position = "absolute";
+      whiteScoreElement.style.top = `${canvasMiddleWhite}px`;
+      whiteScoreElement.style.left = `${lastImagePositionWhite + someOffset}px`;
+    } else {
+      whiteScoreElement.innerText = "";
+    }
+
+    if (blackScore > 0) {
+      for (let i = 0; i < this.blackTakenPieces.length; i++) {
+        let x = (i * tileSize) / 2 + tileSize / 4;
+        let y = tileSize / 4;
+        this.blackTakenPieces[i].showAt(canvasBlack, x, y);
+        lastImagePositionBlack = x;
+      }
+      blackScoreElement.innerText = `+${blackScore}`;
+      blackScoreElement.style.position = "absolute";
+      blackScoreElement.style.top = `${canvasMiddleBlack}px`;
+      blackScoreElement.style.left = `${lastImagePositionBlack + someOffset}px`;
+    } else {
+      blackScoreElement.innerText = "";
     }
   }
 
@@ -125,7 +179,6 @@ class Board {
 
     return this.checkDestinationTile(endX, endY, piece);
   }
-  //TODO: Change this to landing check landing Tile
   checkDestinationTile(x, y, piece) {
     // Check the landing tile
     let pieceAtDestination = this.getPieceAt(x, y);
@@ -143,10 +196,22 @@ class Board {
         let arrayToAdd = pieceAtDestination.white
           ? this.whiteTakenPieces
           : this.blackTakenPieces;
+        let scoreElement = pieceAtDestination.white
+          ? document.getElementById("blackScore")
+          : document.getElementById("whiteScore");
+
         let index = arrayToSearch.indexOf(pieceAtDestination);
         if (index !== -1) {
           arrayToSearch.splice(index, 1);
           arrayToAdd.push(pieceAtDestination);
+          if (pieceAtDestination.white) {
+            whiteScore += pieceAtDestination.value;
+          } else {
+            blackScore += pieceAtDestination.value;
+          }
+          scoreElement.textContent = pieceAtDestination.white
+            ? whiteScore
+            : blackScore;
         }
         return true;
       }
@@ -165,10 +230,22 @@ class Board {
       let arrayToAdd = pieceAtDestination.white
         ? this.whiteTakenPieces
         : this.blackTakenPieces;
+      let scoreElement = pieceAtDestination.white
+        ? document.getElementById("blackScore")
+        : document.getElementById("whiteScore");
+
       let index = arrayToSearch.indexOf(pieceAtDestination);
       if (index !== -1) {
         arrayToSearch.splice(index, 1);
         arrayToAdd.push(pieceAtDestination);
+        if (pieceAtDestination.white) {
+          whiteScore += pieceAtDestination.value;
+        } else {
+          blackScore += pieceAtDestination.value;
+        }
+        scoreElement.textContent = pieceAtDestination.white
+          ? whiteScore
+          : blackScore;
       }
       return true;
     }
@@ -186,10 +263,22 @@ class Board {
       let arrayToAdd = opposingPiece.white
         ? this.whiteTakenPieces
         : this.blackTakenPieces;
+      let scoreElement = opposingPiece.white
+        ? document.getElementById("blackScore")
+        : document.getElementById("whiteScore");
+
       let index = arrayToSearch.indexOf(opposingPiece);
       if (index !== -1) {
         arrayToSearch.splice(index, 1);
         arrayToAdd.push(opposingPiece);
+        if (opposingPiece.white) {
+          whiteScore += opposingPiece.value;
+        } else {
+          blackScore += opposingPiece.value;
+        }
+        scoreElement.textContent = opposingPiece.white
+          ? whiteScore
+          : blackScore;
       }
       return true;
     }

@@ -9,8 +9,35 @@ body {
   background-color: rgb(120, 120, 120);
 }
 
+#whiteScore {
+  position: absolute;
+  top: 45 px; 
+  font-size: 24px; 
+  font-family: 'Arial', sans-serif;
+  color: white; 
+}
+
+#blackScore {
+  position: absolute;
+  top: 45 px;
+  font-size: 24px; 
+  font-family: 'Arial', sans-serif; 
+  color: black; 
+}
+
+
+#scoreElementId {
+  position: absolute;
+  top: 50%; /* This will put it in the middle of the parent element */
+  left: 0; /* This will align it to the right of the last drawn taken image */
+  transform: translateY(-50%); /* This will perfectly center the element vertically */
+}
+
+
+
 #capturedWhitePieces,
 #capturedBlackPieces {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start; 
