@@ -10,15 +10,31 @@
     <script src="pieces.js"></script>
     <script src="board.js"></script>
     <script src="chess_board.js"></script>
+    <script src="main.js"></script>
   </head>
   <body>
-    <div id="capturedWhitePieces">
-      <div id="whiteScore">0</div>
+    <div class="main">
+      <div class="inner">
+        <p data-text="Chess">Chess</p>
+      </div>
     </div>
-    <div id="chessboard"></div>
-    <div id="capturedBlackPieces">
-      <div id="blackScore">0</div>
+
+    <div id="gameContainer">
+      <div id="capturedWhitePieces">
+        <div id="whiteScore">0</div>
+      </div>
+      <div id="chessboard"></div>
+      <div id="capturedBlackPieces">
+        <div id="blackScore">0</div>
+      </div>
     </div>
-    <button id="resetButton">Reset</button>
+    <div class="right-section">
+      <div class="center-center">
+        <a id="resetButton" class="btn-glitch-fill">
+          <span class="text">Reset</span><span class="text-decoration">_</span>
+          <span class="decoration">&rArr;</span>
+        </a>
+      </div>
+    </div>
   </body>
 </html>

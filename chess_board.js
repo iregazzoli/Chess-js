@@ -75,3 +75,12 @@ function mousePressed() {
   }
   moving = !moving;
 }
+
+function resetScores() {
+  whiteScore = 0;
+  blackScore = 0;
+  whitesMoves = true;
+  document.getElementById("whiteScore").innerText = "0";
+  document.getElementById("blackScore").innerText = "0";
+  board.resetPieces();
+}

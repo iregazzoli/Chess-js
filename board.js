@@ -37,6 +37,13 @@ class Board {
     }
   }
 
+  resetPieces() {
+    this.whitePieces = [];
+    this.blackPieces = [];
+    this.whiteTakenPieces = [];
+    this.blackTakenPieces = [];
+  }
+
   show() {
     for (let i = 0; i < this.whitePieces.length; i++) {
       this.whitePieces[i].show();
@@ -61,8 +68,8 @@ class Board {
 
   showTakenPieces(canvasWhite, canvasBlack) {
     let someOffset = tileSize / 4;
-    canvasWhite.background(120, 120, 120);
-    canvasBlack.background(120, 120, 120);
+    // canvasWhite.background(30, 28, 34);
+    // canvasBlack.background(30, 28, 34);
     let lastImagePositionWhite, lastImagePositionBlack;
 
     let whiteScoreElement = document.getElementById("whiteScore");
