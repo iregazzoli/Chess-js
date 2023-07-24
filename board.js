@@ -38,10 +38,14 @@ class Board {
   }
 
   resetPieces() {
+    console.log("resetting pieces");
     this.whitePieces = [];
     this.blackPieces = [];
     this.whiteTakenPieces = [];
     this.blackTakenPieces = [];
+
+    canvasWhiteTakenPieces.clear();
+    canvasBlackTakenPieces.clear();
   }
 
   show() {
