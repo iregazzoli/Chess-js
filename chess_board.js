@@ -1,3 +1,4 @@
+let theme = 0; // 0 - default, 1 - black and white
 let canvasWhiteTakenPieces, canvasBlackTakenPieces;
 let board;
 let moving = false;
@@ -33,13 +34,27 @@ function draw() {
   board.showTakenPieces(canvasWhiteTakenPieces, canvasBlackTakenPieces);
 }
 
+function changeBoardTheme() {
+  theme = (theme + 1) % 2; // cycles between 0 and 1
+}
+
 function showGrid() {
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
-      if ((i + j) % 2 == 0) {
-        fill(0);
+      if (theme == 0) {
+        // default theme
+        if ((i + j) % 2 == 0) {
+          fill(0);
+        } else {
+          fill(150, 0, 0);
+        }
       } else {
-        fill(150, 0, 0);
+        // black and white theme
+        if ((i + j) % 2 == 0) {
+          fill(0);
+        } else {
+          fill(255);
+        }
       }
       noStroke();
       rect(i * tileSize, j * tileSize, tileSize, tileSize);
