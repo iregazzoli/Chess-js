@@ -428,7 +428,7 @@ body {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color:#fefe33;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -438,9 +438,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px; /* You might need to adjust this */
+  height: 50px; 
   color: black;
   text-decoration: none;
+  border-bottom: 1px solid black;
 }
 
 .dropdown-content a:hover {
@@ -449,7 +450,17 @@ body {
 
 .dropdown:hover .dropdown-content {
   display: block;
+
 }
+
+.dropdown:hover #themeButton {
+  animation-name: glitch;
+  animation-duration: 0.2s;
+  background-color: red;
+  color:black;
+  border: 1px solid red;
+}
+
 
 .dropdown-content img {
   width: 4rem;
