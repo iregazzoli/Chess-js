@@ -38,3 +38,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
     changeBoardTheme();
   });
 });
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  var themes = [
+    "black-white",
+    "red-black",
+    "blue-black",
+    "green-black",
+    "yellow-black",
+  ];
+
+  themes.forEach((theme, index) => {
+    var themeButton = document.getElementById(theme + "-theme");
+    themeButton.addEventListener("click", function (event) {
+      event.stopPropagation(); // This line is added to prevent the event from propagating to parent elements
+      changeBoardTheme(index + 1);
+    });
+  });
+});

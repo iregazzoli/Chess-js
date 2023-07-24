@@ -1,4 +1,4 @@
-let theme = 0; // 0 - default, 1 - black and white
+let theme = 0;
 let canvasWhiteTakenPieces, canvasBlackTakenPieces;
 let board;
 let moving = false;
@@ -34,28 +34,31 @@ function draw() {
   board.showTakenPieces(canvasWhiteTakenPieces, canvasBlackTakenPieces);
 }
 
-function changeBoardTheme() {
-  theme = (theme + 1) % 2; // cycles between 0 and 1
+function changeBoardTheme(themeIndex) {
+  theme = themeIndex || 0;
+}
+
+function selectTheme(i, j, theme) {
+  switch (theme) {
+    case 0: // Default theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(150, 0, 0);
+    case 1: // Black and white theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(255);
+    case 2: // Red and black theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(150, 0, 0); // RGB value for red
+    case 3: // Blue and black theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(0, 0, 150); // RGB value for blue
+    case 4: // Green and black theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(0, 150, 0); // RGB value for green
+    case 5: // Yellow and black theme
+      return (i + j) % 2 == 0 ? fill(0) : fill(230, 230, 0); // RGB value for yellow
+  }
 }
 
 function showGrid() {
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
-      if (theme == 0) {
-        // default theme
-        if ((i + j) % 2 == 0) {
-          fill(0);
-        } else {
-          fill(150, 0, 0);
-        }
-      } else {
-        // black and white theme
-        if ((i + j) % 2 == 0) {
-          fill(0);
-        } else {
-          fill(255);
-        }
-      }
+      selectTheme(i, j, theme);
       noStroke();
       rect(i * tileSize, j * tileSize, tileSize, tileSize);
     }
