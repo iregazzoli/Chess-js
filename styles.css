@@ -457,9 +457,55 @@ body {
   animation-name: glitch;
   animation-duration: 0.2s;
   background-color: red;
-  color:black;
+  color: rgb(255, 255, 255);
   border: 1px solid red;
 }
+
+.dropdown:hover #themeButton .text-decoration,
+.dropdown:hover #themeButton .decoration {
+  animation-name: blink;
+  animation-duration: 0.1s;
+  animation-iteration-count: infinite;
+}
+
+.dropdown:hover #themeButton::before {
+  content: " ";
+  width: 15px;
+  border: 1px solid black;
+  position: absolute;
+  right: 25%;
+  bottom: 3px;
+  transform: rotate(35deg);
+}
+
+.dropdown:hover #themeButton::after {
+  animation-name: shrink;
+  animation-duration: .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  content: " ";
+  width: 75%;
+  border: 1px solid black;
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+}
+
+.dropdown:active #themeButton {
+  background: none;
+  color: red;
+}
+
+.dropdown:active #themeButton .text-decoration,
+.dropdown:active #themeButton .decoration {
+  animation-name: none;
+}
+
+.dropdown:active #themeButton::before,
+.dropdown:active #themeButton::after {
+  display: none;
+}
+
 
 
 .dropdown-content img {
@@ -467,9 +513,6 @@ body {
   height: 2rem; 
   object-fit: cover;
 }
-
-
-
 
 @keyframes glitch {
   25% {
